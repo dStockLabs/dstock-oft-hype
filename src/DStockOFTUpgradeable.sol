@@ -51,6 +51,8 @@ contract DStockOFTUpgradeable is
         address _admin,
         address _treasury
     ) external initializer {
+        if (_admin == address(0)) revert InvalidAddress(_admin);
+
         __OFT_init(_name, _symbol, _lzDelegate);
 
         // Compatibility: some LayerZero OFTUpgradeable variants do not initialize Ownable.

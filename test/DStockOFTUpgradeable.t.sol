@@ -116,6 +116,16 @@ contract DStockOFTUpgradeableTest is Test {
         assertTrue(token.hasRole(token.DEFAULT_ADMIN_ROLE(), admin));
     }
 
+    function test_initialize_reverts_ifAdminIsZero_evenIfTreasuryNonZero() external {
+        bytes memory initData = abi.encodeCall(
+            DStockOFTUpgradeable.initialize,
+            ("DStock", "DST", delegate, address(0), treasury)
+        );
+
+        vm.expectRevert(abi.encodeWithSelector(DStockOFTUpgradeable.InvalidAddress.selector, address(0)));
+        new TransparentUpgradeableProxy(address(implV1), proxyAdminOwner, initData);
+    }
+
     // =============================================================
     // Pause / Unpause (cross-chain only)
     // =============================================================
