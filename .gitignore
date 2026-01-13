@@ -1,6 +1,8 @@
 # Compiler files
 cache/
 out/
+evm/cache/
+evm/out/
 
 # Ignores development broadcast logs
 !/broadcast
@@ -27,3 +29,4 @@ lcov.info
 
 # Node dependencies
 node_modules/
+evm/node_modules/
